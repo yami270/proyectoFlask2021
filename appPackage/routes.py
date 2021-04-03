@@ -9,7 +9,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-	return 'esta es la raiz'
+	return render_template('home.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def loginRoute():
