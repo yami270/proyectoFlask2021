@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-8">
+<div class="card">
+<div class="card-header"> Ingreso al sistema </div>
+
+<div class="card-body">
+  <form method="POST" action="#">
+    <div class="form-group row py-3">
+      <label for="username" class="col-md-4 col-form-label text-md-end"> Usuario </label>
+
+      <div class="col-md-6">
+          <input id="username" type="text" class="form-control" name="username" value="" required autocomplete="username" autofocus>
+              <span class="invalid-feedback" role="alert">
+                  <strong>d</strong>
+              </span>
+      </div>
+    </div>
+    <div class="form-group row pb-3">
+      <label for="password" class="col-md-4 col-form-label text-md-end"> Contraseña </label>
+      <div class="col-md-6">
+        <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+      
+            <span class="invalid-feedback" role="alert">
+               <strong>d</strong>
+            </span>
+      </div>
+    </div>
+    <div class="form-group row mb-0 justify-content-center">
+      <button type="submit" class="btn btn-primary col-auto"> Ingresar </button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -14,7 +14,7 @@ def index():
 @app.route('/login', methods=["GET", "POST"])
 def loginRoute():
 	if request.method == 'GET':
-		return 'esto es el login de la vista'
+		return render_template('login.html')
 	else:
 		#solo es una especulacion
 
