@@ -5,28 +5,40 @@
 <div class="row justify-content-center">
 <div class="col-md-8">
 <div class="card">
-<div class="card-header"> Ingreso al sistema </div>
+<div class="card-header">  Ingreso al sistema  </div>
 
 <div class="card-body">
-  <form method="POST" action="#">
+  <form method="POST" action="{{url_for('loginRoute')}}">
+    {{ form.csrf_token }}
     <div class="form-group row py-3">
-      <label for="username" class="col-md-4 col-form-label text-md-end"> Usuario </label>
-
+      {{ form.username.label(class="col-md-4 col-form-label text-md-end")}} 
       <div class="col-md-6">
-          <input id="username" type="text" class="form-control" name="username" value="" required autocomplete="username" autofocus>
-              <span class="invalid-feedback" role="alert">
-                  <strong>d</strong>
-              </span>
+      {% if form.username.errors %}
+        {{ form.username(class="form-control is-invalid", autofocus=True) }} 
+        {% for error in form.username.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.username(class="form-control", autofocus=True) }} 
+      {% endif %}
       </div>
     </div>
+
     <div class="form-group row pb-3">
-      <label for="password" class="col-md-4 col-form-label text-md-end"> Contraseña </label>
+      {{ form.password.label(class="col-md-4 col-form-label text-md-end")}} 
       <div class="col-md-6">
-        <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
-      
-            <span class="invalid-feedback" role="alert">
-               <strong>d</strong>
-            </span>
+        {% if form.password.errors %}
+          {{ form.password(class="form-control is-invalid") }} 
+          {% for erro in form.password.errors %}
+          <div class="invalid-feedback">
+            <strong>{{ erro }}</strong>
+          </div>
+          {% endfor %}
+        {% else %}
+          {{ form.password(class="form-control") }} 
+        {% endif %}
       </div>
     </div>
     <div class="form-group row mb-0 justify-content-center">

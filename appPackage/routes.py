@@ -1,5 +1,6 @@
 from appPackage import app, login_manager
 from .models import db, user, machine, component, utilization, purchase
+from .formsValidation import loginForm
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, logout_user, current_user, login_user
 
@@ -9,32 +10,18 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-	return render_template('home.html')
+	return redirect(url_for('loginRoute'))
 
 @app.route('/login', methods=["GET", "POST"])
 def loginRoute():
-	if request.method == 'GET':
-		return render_template('login.html')
-	else:
-		#solo es una especulacion
-
-		# form = SignupForm()
-  #   if form.validate_on_submit():
-  #     existing_user = User.query.filter_by(email=form.email.data).first()
-  #     if existing_user is None:
-  #       user = User(name=form.name.data, email=form.email.data, website=form.website.data)
-  #     user.set_password(form.password.data)
-  #     db.session.add(user)
-  #     db.session.commit()  # Create new user
-  #     login_user(user)  # Log in as newly created user
-  #     return redirect(url_for('main_bp.dashboard'))
-  #   flash('A user already exists with that email address.')
-
-		return 'esto es el login del post'
+	form = loginForm(request.form) # Creacion del formulario
+	if request.method == 'POST' and form.validate():
+		return redirect(url_for('homeRoute'))
+	return render_template('login.html', form=form)
 
 @app.route('/home')
 def homeRoute():
-	return 'este es el home'
+	return render_template('home.html')
 
 @app.route('/registro', methods=["GET", "POST"])
 def register():
