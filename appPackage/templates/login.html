@@ -31,9 +31,9 @@
       <div class="col-md-6">
         {% if form.password.errors %}
           {{ form.password(class="form-control is-invalid") }} 
-          {% for erro in form.password.errors %}
+          {% for error in form.password.errors %}
           <div class="invalid-feedback">
-            <strong>{{ erro }}</strong>
+            <strong>{{ error }}</strong>
           </div>
           {% endfor %}
         {% else %}

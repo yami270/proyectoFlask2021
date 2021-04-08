@@ -1,6 +1,6 @@
 from appPackage import app, login_manager
 from .models import db, user, machine, component, utilization, purchase
-from .formsValidation import loginForm
+from .formsValidation import loginForm, registerForm
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, logout_user, current_user, login_user
 
@@ -25,15 +25,16 @@ def homeRoute():
 
 @app.route('/registro', methods=["GET", "POST"])
 def register():
-	if request.method == 'POST':
-		return 'esto es from de registro'
+	form = registerForm(request.form) # Creacion del formulario
+	if request.method == 'POST' and form.validate():
+		return 'esto es from de registro valido'
 	else:
-		userNuevo = user(nameUser='migufe6l4', username='yamri2d77_', typeUser=1)
-		userNuevo.set_password('miau')
-		db.session.add(userNuevo)
-		db.session.commit()  # Create new user
-		#login_user(userNuevo) #logea al nuevo usuario
-		return 'esto es el login del post'
+		# userNuevo = user(nameUser='migufe6l4', username='yamri2d77_', typeUser=1)
+		# userNuevo.set_password('miau')
+		# db.session.add(userNuevo)
+		# db.session.commit()  # Create new user
+		# #login_user(userNuevo) #logea al nuevo usuario
+		return render_template('register.html', form=form)
 
 @app.route('/registroMaquina')
 def registerMachineRoute():

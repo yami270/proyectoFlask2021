@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-8">
+<div class="card">
+<div class="card-header"> Registrar nuevo usuario </div>
+<div class="card-body">
+<form method="POST" action="{{url_for('register')}}" id="form-register">
+  {{ form.csrf_token }}
+
+  <div class="form-group row py-2">
+    {{ form.nameUser.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-6">
+
+    {% if form.nameUser.errors %}
+      {{ form.nameUser(class="form-control is-invalid", placeholder='Apellidos y nombres') }} 
+      {% for error in form.nameUser.errors %}
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ error }}</strong>
+      </span>
+      {% endfor %}
+    {% else %}
+      {{ form.nameUser(class="form-control", placeholder='Apellidos y nombres') }} 
+    {% endif %}
+
+    </div>
+  </div>
+
+
+  <div class="form-group row py-2">
+    {{ form.typeUser.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-6">
+      {% if form.typeUser.errors %}
+        {{ form.typeUser(class="form-control is-invalid") }} 
+        {% for error in form.typeUser.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.typeUser(class="form-control") }} 
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group row py-2">
+    {{ form.username.label(class="col-md-4 col-form-label text-md-end")}} 
+    <div class="col-md-6">
+    {% if form.username.errors %}
+      {{ form.username(class="form-control is-invalid") }} 
+      {% for error in form.username.errors %}
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ error }}</strong>
+      </span>
+      {% endfor %}
+    {% else %}
+      {{ form.username(class="form-control") }} 
+    {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group row py-2">
+    {{ form.password.label(class="col-md-4 col-form-label text-md-end")}} 
+    <div class="col-md-6">
+      {% if form.password.errors %}
+        {{ form.password(class="form-control is-invalid") }} 
+        {% for error in form.password.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.password(class="form-control") }} 
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group row py-2">
+    {{ form.confirm.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-6">
+      {% if form.confirm.errors %}
+        {{ form.confirm(class="form-control is-invalid") }} 
+        {% for error in form.confirm.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.confirm(class="form-control") }} 
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group row my-2">
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary"> Registrar </button>
+    </div>
+  </div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
