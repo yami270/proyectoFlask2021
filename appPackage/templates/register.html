@@ -4,10 +4,27 @@
 <div class="container">
 <div class="row justify-content-center">
 <div class="col-md-8">
+
+  {% with errors = get_flashed_messages(category_filter=["AC"]) %}
+  {% if errors %}
+    {% for msg in errors %}
+      <div class="alert alert-success" role="alert"> {{ msg }} </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {% with errors = get_flashed_messages(category_filter=["WA"]) %}
+  {% if errors %}
+    {% for msg in errors %}
+      <div class="alert alert-danger" role="alert"> {{ msg }} </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
 <div class="card">
 <div class="card-header"> Registrar nuevo usuario </div>
 <div class="card-body">
-<form method="POST" action="{{url_for('register')}}" id="form-register">
+<form method="POST" action="{{url_for('registerRoute')}}" id="form-register">
   {{ form.csrf_token }}
 
   <div class="form-group row py-2">

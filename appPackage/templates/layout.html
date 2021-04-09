@@ -12,13 +12,14 @@
 <div id="app">
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm px-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"> Copelme S.A. </a>
+    <a class="navbar-brand" href="{{url_for('homeRoute')}}"> Copelme S.A. </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse px-3" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav me-auto">
+        {% if formLogout %}
         <li class="nav-item dropdown">
           <a id="navbarDropdownLeft" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Ver informacion </a>
 
@@ -45,18 +46,19 @@
         <li class="nav-item"> 
           <a class="nav-link" href="#">Stock</a>
         </li>
+        {% endif %}
       </ul>
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">
         <!-- Authentication Links -->
         <li class="nav-item">
-          <a class="nav-link" href="#"> Registrar usuario</a>
+          <a class="nav-link" href="{{url_for('registerRoute')}}"> Registrar usuario</a>
         </li>
+        {% if formLogout %}
         <li class="nav-item dropdown">
           <a id="navbarDropdownRight" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Nombre de usuario
+              {{ current_user.nameUser }}
           </a>
-
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownRight">
             <a class="dropdown-item" href="#"
                onclick="event.preventDefault();
@@ -64,10 +66,12 @@
                 Salir
             </a>
 
-            <form id="logout-form" action="#" method="POST" class="d-none">
+            <form id="logout-form" action="{{url_for('logoutRoute')}}" method="POST" class="d-none">
+              {{ formLogout.csrf_token }}
             </form>
           </div>
         </li>
+        {% endif %}
       </ul>
     </div>
   </div>
