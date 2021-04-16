@@ -27,7 +27,6 @@ def homeRoute():
 def registerRoute():
 	return myRegisterController.registerRoute(request)
 
-
 @app.route('/registroMaquina', methods=["GET", "POST"])
 @login_required
 def registerMachineRoute():
@@ -47,6 +46,16 @@ def updateRoute():
 @login_required
 def stockRoute():
 	return 'registrar stock'
+
+@app.route('/verMaquina', methods=["GET"])
+@login_required
+def viewMachineRoute():
+	return myMachineController.viewMachineRoute(request)
+
+@app.route('/verComponente', methods=["GET"])
+@login_required
+def viewComponentRoute():
+	return myComponentController.viewComponentRoute(request)
 
 from appPackage.controllers.LoginController import LoginController 
 myLoginController = LoginController()

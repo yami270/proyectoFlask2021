@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-8">
+<div class="card" id="ver-componente">
+<div class="card-header"> Ver componente </div>
+  <div class="card-body">
+    <div class="form-group row py-2">
+      <label for="codeComponent" class="col-md-4 col-form-label text-md-end"> Nombre componente </label>
+      <div class="col-md-6">
+        <select id="codeComponent" class="form-control" name="codeComponent">
+        {% for value in data %}
+          <option value="{{value.id}}"> {{value.machine.nameMachine+" : "+value.nameComponent}} </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row py-2">
+      <label for="nameComponent" class="col-md-4 col-form-label text-md-end"> Nombre componente </label>
+      <div class="col-md-6">
+        <input id="nameComponent" type="text" class="form-control" name="nameComponent" readonly>
+      </div>
+    </div>
+
+    <div class="form-group row py-2">
+      <label for="typeComponent" class="col-md-4 col-form-label text-md-end"> Tipo de equipo </label>
+      <div class="col-md-2 pe-0">
+        <input id="typeComponent" type="text" class="form-control" name="typeComponent" readonly>
+      </div>
+      <label for="priority" class="col-md-2 col-form-label text-md-end px-0"> Prioridad </label>
+      <div class="col-md-2">
+        <input id="priority" type="text" class="form-control" name="priority" readonly>
+      </div>
+    </div>
+
+    <div class="form-group row py-2">
+      <label for="notes" class="col-md-4 col-form-label text-md-end"> Notas para el tecnico</label>
+      <div class="col-md-6">
+        <textarea id="notes" class="form-control" readonly>
+        </textarea>
+      </div>
+    </div>
+
+    <div class="form-group row py-2">
+      <label for="currentStock" class="col-md-4 col-form-label text-md-end"> Cantidad Stock </label>
+      <div class="col-md-2">
+        <input id="currentStock" type="number" class="form-control" readonly>
+      </div>
+      <label for="minimumStock" class="col-md-2 col-form-label text-md-left px-0"> Cantidad minima </label>
+      <div class="col-md-2">
+        <input id="minimumStock" type="number" class="form-control" readonly>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

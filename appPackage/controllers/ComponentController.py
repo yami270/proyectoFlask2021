@@ -28,3 +28,8 @@ class ComponentController():
 			return redirect(url_for('homeRoute'))
 		else:
 			return render_template('registerComponent.html', formLogout=formLogout, form=form)
+
+	def viewComponentRoute(self, request):
+		formLogout = loginForm()
+		data = db.session.query(component).order_by(component.codeMachine.asc())
+		return render_template('viewComponent.html', formLogout=formLogout, data=data)
