@@ -31,12 +31,12 @@ def registerRoute():
 @app.route('/registroMaquina', methods=["GET", "POST"])
 @login_required
 def registerMachineRoute():
-	return 'registrar maquina'
+	return myMachineController.registerMachineRoute(request)
 
 @app.route('/registroComponente', methods=["GET", "POST"])
 @login_required
 def registerComponentRoute():
-	return 'registrar componente'
+	return myComponentController.registerComponentRoute(request)
 
 @app.route('/actualizar', methods=["GET", "POST"])
 @login_required
@@ -53,3 +53,9 @@ myLoginController = LoginController()
 
 from appPackage.controllers.RegisterController import RegisterController 
 myRegisterController = RegisterController()
+
+from appPackage.controllers.MachineController import MachineController 
+myMachineController = MachineController()
+
+from appPackage.controllers.ComponentController import ComponentController 
+myComponentController = ComponentController()
