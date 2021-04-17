@@ -52,10 +52,20 @@ def stockRoute():
 def viewMachineRoute():
 	return myMachineController.viewMachineRoute(request)
 
+@app.route('/verMaquina', methods=["POST"])
+@login_required
+def getMachineRoute():
+	return myMachineController.getMachineRoute(request)
+
 @app.route('/verComponente', methods=["GET"])
 @login_required
 def viewComponentRoute():
 	return myComponentController.viewComponentRoute(request)
+
+@app.route('/verComponente', methods=["POST"])
+@login_required
+def getComponentRoute():
+	return myComponentController.getComponentRoute(request)
 
 from appPackage.controllers.LoginController import LoginController 
 myLoginController = LoginController()

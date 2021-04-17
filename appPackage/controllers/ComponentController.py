@@ -2,6 +2,7 @@ from appPackage.models import db, user, machine, component, utilization, purchas
 from appPackage.formsValidation import loginForm, registerForm, machineForm, componentForm
 from appPackage.routes import *
 from flask import render_template, request, redirect, url_for, flash
+import json
 
 class ComponentController():
 	def __init__(self):
@@ -33,3 +34,10 @@ class ComponentController():
 		formLogout = loginForm()
 		data = db.session.query(component).order_by(component.codeMachine.asc())
 		return render_template('viewComponent.html', formLogout=formLogout, data=data)
+
+	def getComponentRoute(self, request):
+		dataRequest = request.json
+		data = db.session.query(component).filter(component.id == dataRequest['codeComponent']).first()
+		xxx = data.__dict__
+		xxx.pop('_sa_instance_state', None)
+		return json.dumps(xxx)
