@@ -24,6 +24,7 @@ def homeRoute():
 	return myLoginController.homeRoute()
 
 @app.route('/registro', methods=["GET", "POST"])
+@login_required
 def registerRoute():
 	return myRegisterController.registerRoute(request)
 

@@ -51,10 +51,10 @@
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">
         <!-- Authentication Links -->
+        {% if formLogout %}
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('registerRoute')}}"> Registrar usuario</a>
         </li>
-        {% if formLogout %}
         <li class="nav-item dropdown">
           <a id="navbarDropdownRight" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ current_user.nameUser }}
