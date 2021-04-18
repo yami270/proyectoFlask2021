@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-8">
+
+  {% with errors = get_flashed_messages(category_filter=["AC"]) %}
+  {% if errors %}
+    {% for msg in errors %}
+      <div class="alert alert-success" role="alert"> {{ msg }} </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {% with errors = get_flashed_messages(category_filter=["WA"]) %}
+  {% if errors %}
+    {% for msg in errors %}
+      <div class="alert alert-danger" role="alert"> {{ msg }} </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+<div class="card">
+  <div class="card-header"> Registrar compra </div>
+    <div class="card-body">
+      <form method="POST" action="{{url_for('tockPurchaseRoute')}}" id="form-stock-purchase">
+        {{ formPurchase.csrf_token }}
+
+        <div class="form-group row py-2">
+          {{ formPurchase.codeComponent.label(class="col-md-4 col-form-label text-md-end")}}
+          <div class="col-md-6">
+          {% if formPurchase.codeComponent.errors %}
+            {{ formPurchase.codeComponent(class="form-control is-invalid") }} 
+            {% for error in formPurchase.codeComponent.errors %}
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ error }}</strong>
+            </span>
+            {% endfor %}
+          {% else %}
+            {{ formPurchase.codeComponent(class="form-control") }} 
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          {{ formPurchase.amount.label(class="col-md-4 col-form-label text-md-end")}}
+          <div class="col-md-3">
+            {% if formPurchase.amount.errors %}
+              {{ formPurchase.amount(class="form-control is-invalid", type="number") }} 
+              {% for error in formPurchase.amount.errors %}
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ error }}</strong>
+              </span>
+              {% endfor %}
+            {% else %}
+              {{ formPurchase.amount(class="form-control", type="number") }} 
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          {{ formPurchase.date.label(class="col-md-4 col-form-label text-md-end")}}
+          <div class="col-md-4">
+            {% if formPurchase.date.errors %}
+              {{ formPurchase.date(class="form-control is-invalid", type="date") }} 
+              {% for error in formPurchase.date.errors %}
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ error }}</strong>
+              </span>
+              {% endfor %}
+            {% else %}
+              {{ formPurchase.date(class="form-control", type="date") }} 
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group row my-2">
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary"> Registrar Compra </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"> Registrar uso </div>
+    <div class="card-body">
+      <form method="POST" action="{{url_for('stockUtilizationRoute')}}" id="form-stock-utilization">
+        {{ formUtilization.csrf_token }}
+
+        <div class="form-group row py-2">
+          {{ formUtilization.codeComponent.label(class="col-md-4 col-form-label text-md-end")}}
+          <div class="col-md-6">
+          {% if formUtilization.codeComponent.errors %}
+            {{ formUtilization.codeComponent(class="form-control is-invalid") }} 
+            {% for error in formUtilization.codeComponent.errors %}
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ error }}</strong>
+            </span>
+            {% endfor %}
+          {% else %}
+            {{ formUtilization.codeComponent(class="form-control") }} 
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="amount" class="col-md-4 col-form-label text-md-end"> Cantidad utilizada </label>
+          <div class="col-md-3">
+            {% if formUtilization.amount.errors %}
+              {{ formUtilization.amount(class="form-control is-invalid", type="number") }} 
+              {% for error in formUtilization.amount.errors %}
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ error }}</strong>
+              </span>
+              {% endfor %}
+            {% else %}
+              {{ formUtilization.amount(class="form-control", type="number") }} 
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          {{ formUtilization.date.label(class="col-md-4 col-form-label text-md-end")}}
+          <div class="col-md-4">
+            {% if formUtilization.date.errors %}
+              {{ formUtilization.date(class="form-control is-invalid", type="date") }} 
+              {% for error in formUtilization.date.errors %}
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ error }}</strong>
+              </span>
+              {% endfor %}
+            {% else %}
+              {{ formUtilization.date(class="form-control", type="date") }} 
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group row my-2">
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary"> Registrar uso </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+{% endblock %}

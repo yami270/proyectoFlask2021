@@ -13,11 +13,11 @@ class RegisterController():
 		if request.method == 'POST' and form.validate():
 			userTemp = db.session.query(user).filter(user.nameUser == request.form['nameUser']).first()
 			if userTemp: # error de nombre
-				flash('Error: Ya existe una cuenta registra a ese nombre', 'WA')
+				flash('Error: Ya existe una cuenta registrada a ese nombre', 'WA')
 				return render_template('register.html', formLogout=formLogout, form=form)
 			userTemp = db.session.query(user).filter(user.username == request.form['username']).first()
 			if userTemp: # error de nombre de usuario
-				flash('Error: Ya existe una cuenta registra a ese nombre de usuario', 'WA')
+				flash('Error: Ya existe una cuenta registrada a ese nombre de usuario', 'WA')
 				return render_template('register.html', formLogout=formLogout, form=form)
 			userNuevo = user(nameUser=request.form['nameUser'], username=request.form['username'], typeUser=request.form['typeUser'])
 			userNuevo.set_password(request.form['password'])

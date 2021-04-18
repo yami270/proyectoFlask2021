@@ -43,9 +43,19 @@ def registerComponentRoute():
 def updateRoute():
 	return 'actualizar datos'
 
-@app.route('/stock', methods=["GET", "POST"])
+@app.route('/stock', methods=["GET"])
 @login_required
 def stockRoute():
+	return 'registrar stock'
+
+@app.route('/stock/compra', methods=["POST"])
+@login_required
+def stockPurchaseRoute():
+	return 'registrar stock'
+
+@app.route('/stock/uso', methods=["POST"])
+@login_required
+def stockUtilizationRoute():
 	return 'registrar stock'
 
 @app.route('/verMaquina', methods=["GET"])
