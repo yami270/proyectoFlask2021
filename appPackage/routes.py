@@ -51,7 +51,7 @@ def stockRoute():
 @app.route('/stock/compra', methods=["POST"])
 @login_required
 def stockPurchaseRoute():
-	return 'registrar stock compra'
+	return myStockController.stockPurchaseRoute(request)
 
 @app.route('/stock/uso', methods=["POST"])
 @login_required

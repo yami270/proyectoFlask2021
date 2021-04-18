@@ -47,14 +47,14 @@
         <label for="amount" class="col-md-4 col-form-label text-md-end"> Cantidad comprada </label>
         <div class="col-md-3">
           {% if formPurchase.amount.errors %}
-            {{ formPurchase.amount(class="form-control is-invalid", type="number") }} 
+            {{ formPurchase.amount(class="form-control is-invalid", type="number", min="1") }} 
             {% for error in formPurchase.amount.errors %}
             <span class="invalid-feedback" role="alert">
               <strong>{{ error }}</strong>
             </span>
             {% endfor %}
           {% else %}
-            {{ formPurchase.amount(class="form-control", type="number") }} 
+            {{ formPurchase.amount(class="form-control", type="number", min="1") }} 
           {% endif %}
         </div>
       </div>
@@ -111,14 +111,14 @@
         <label for="amount" class="col-md-4 col-form-label text-md-end"> Cantidad utilizada </label>
         <div class="col-md-3">
           {% if formUtilization.amount.errors %}
-            {{ formUtilization.amount(class="form-control is-invalid", type="number") }} 
+            {{ formUtilization.amount(class="form-control is-invalid", type="number", min="1") }} 
             {% for error in formUtilization.amount.errors %}
             <span class="invalid-feedback" role="alert">
               <strong>{{ error }}</strong>
             </span>
             {% endfor %}
           {% else %}
-            {{ formUtilization.amount(class="form-control", type="number") }} 
+            {{ formUtilization.amount(class="form-control", type="number", min="1") }} 
           {% endif %}
         </div>
       </div>

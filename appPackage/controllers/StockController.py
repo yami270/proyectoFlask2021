@@ -13,3 +13,19 @@ class StockController():
 		formUtilization = formPurchase
 		formLogout = loginForm()
 		return render_template('stock.html', formLogout=formLogout, formPurchase=formPurchase, formUtilization=formUtilization)
+
+	def stockPurchaseRoute(self, request):
+		formPurchase = stockForm(request.form) # Creacion del formulario
+		formPurchase.codeComponent.choices = [(g.id, g.machine.nameMachine+" : "+g.nameComponent) for g in db.session.query(component)]
+		formLogout = loginForm()
+		if formPurchase.validate():
+			purchaseNuevo = purchase(codeComponent=request.form['codeComponent'], date=request.form['date'], amount=request.form['amount'])
+			db.session.add(purchaseNuevo)
+			componentUpdate = db.session.query(component).filter(component.id == request.form['codeComponent']).first()
+			componentUpdate.currentStock += int(request.form['amount'])
+			db.session.commit() 
+			flash('Compra registrada exitosamente', 'AC')
+			return redirect(url_for('homeRoute'))
+		else:
+			flash('Datos invalidos', 'WA')
+			return redirect(url_for('stockRoute'))
