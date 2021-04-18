@@ -56,7 +56,7 @@ def stockPurchaseRoute():
 @app.route('/stock/uso', methods=["POST"])
 @login_required
 def stockUtilizationRoute():
-	return 'registrar stock uso'
+	return myStockController.stockUtilizationRoute(request)
 
 @app.route('/verMaquina', methods=["GET"])
 @login_required
