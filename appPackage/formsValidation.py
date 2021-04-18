@@ -26,3 +26,8 @@ class componentForm(FlaskForm):
 	currentStock = IntegerField('Cantidad Stock', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
 	minimumStock = IntegerField('Cantidad minima', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
 	date = DateField('Fecha de registro', [DataRequired(message='Debe llenar este campo')])
+
+class stockForm(FlaskForm):
+	codeComponent = SelectField('Nombre Componente', coerce=int)
+	amount = IntegerField('Cantidad', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
+	date = DateField('Fecha registro', [DataRequired(message='Debe llenar este campo')])
