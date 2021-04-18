@@ -46,17 +46,17 @@ def updateRoute():
 @app.route('/stock', methods=["GET"])
 @login_required
 def stockRoute():
-	return 'registrar stock'
+	return myStockController.stockRoute(request)
 
 @app.route('/stock/compra', methods=["POST"])
 @login_required
 def stockPurchaseRoute():
-	return 'registrar stock'
+	return 'registrar stock compra'
 
 @app.route('/stock/uso', methods=["POST"])
 @login_required
 def stockUtilizationRoute():
-	return 'registrar stock'
+	return 'registrar stock uso'
 
 @app.route('/verMaquina', methods=["GET"])
 @login_required
@@ -89,3 +89,6 @@ myMachineController = MachineController()
 
 from appPackage.controllers.ComponentController import ComponentController 
 myComponentController = ComponentController()
+
+from appPackage.controllers.StockController import StockController 
+myStockController = StockController()
