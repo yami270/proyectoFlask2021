@@ -1,7 +1,7 @@
 # Proyecto INF 3811 - INGENIERIA DE SOFTWARE II
 ## De que trata?
 Esta es una aplicacion Web para el sistema de inventario de la empresa "COPELME" para el area de mantenimiento, desarrollado utilizando el lenguaje Python y su framework Flask.
-<img src="https://mpng.subpng.com/20180809/hvf/kisspng-flask-by-example-web-framework-python-bottle-sebastian-estenssoro-5b6c0aa33b3b57.9170119715338072672426.jpg" style="text-align: center; width: 300px;">
+<img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/46941709/original/d5ace87ba59d0d4e5151668e60e8eaf673153ff7/build-api-in-python-flask.jpg" style="text-align: center; width: 200px;">
 ### Utiliza el ORM SQLAlchemy
 ### Autenticacion de usuario usando Flask-login 
 ### Proteccion CSRF
