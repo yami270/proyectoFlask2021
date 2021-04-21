@@ -30,4 +30,5 @@ class LoginController():
 
 	def homeRoute(self):
 		form = loginForm()
-		return render_template('home.html', formLogout=form, current_user=current_user)
+		dataComponent = db.session.query(component).order_by(component.codeMachine.asc())
+		return render_template('home.html', formLogout=form, current_user=current_user, dataComponent=dataComponent)

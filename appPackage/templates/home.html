@@ -24,19 +24,23 @@
 <div class="card">
   <div class="card-header"> <h5 class="text-center my-1"> <strong>Notificaciones </strong> </h5>  </div>
   <div class="card-body">
-
-    <div class="alert alert-danger my-2" role="alert">
-		  El componente <strong>x</strong> con ID: <strong>y</strong> tiene una cantidad menor a su limite minimo. Tiene un tiempo de entrega de: <strong>z</strong>
-		</div>
-
-		<div class="alert alert-warning my-2" role="alert">
-		  El componente <strong>x</strong> con ID: <strong>y</strong> tiene una cantidad menor a su limite minimo. Tiene un tiempo de entrega de: <strong>z</strong>
-		</div>
-
-		<div class="alert alert-success my-2" role="alert">
-		  El componente <strong>x</strong> con ID: <strong>y</strong> tiene una cantidad menor a su limite minimo. Tiene un tiempo de entrega de: <strong>z</strong>
-		</div>
-
+    {% for value in dataComponent %}
+      {% if value.currentStock < value.minimumStock %}
+        {% if value.priority == 1 %}
+          <div class="alert alert-danger my-2" role="alert">
+      		  El componente <strong> {{value.nameComponent}}</strong> perteneciente a la maquina <strong>{{value.machine.nameMachine}}</strong> tiene una cantidad menor a su limite minimo.
+      		</div>
+        {% elif value.priority == 2 %}
+      		<div class="alert alert-warning my-2" role="alert">
+      		  El componente <strong> {{value.nameComponent}}</strong> perteneciente a la maquina <strong>{{value.machine.nameMachine}}</strong> tiene una cantidad menor a su limite minimo.
+      		</div>
+        {% elif value.priority == 3 %}
+      		<div class="alert alert-success my-2" role="alert">
+      		  El componente <strong> {{value.nameComponent}}</strong> perteneciente a la maquina <strong>{{value.machine.nameMachine}}</strong> tiene una cantidad menor a su limite minimo.
+      		</div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
   </div>
 </div>
 </div>
