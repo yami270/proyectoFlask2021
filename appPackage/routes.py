@@ -38,10 +38,15 @@ def registerMachineRoute():
 def registerComponentRoute():
 	return myComponentController.registerComponentRoute(request)
 
-@app.route('/actualizar', methods=["GET", "POST"])
+@app.route('/actualizarMaquina', methods=["GET", "POST"])
 @login_required
-def updateRoute():
-	return 'actualizar datos'
+def updateMachineRoute():
+	return myMachineController.updateMachineRoute(request)
+
+@app.route('/actualizarComponente', methods=["GET", "POST"])
+@login_required
+def updateComponentRoute():
+	return myComponentController.updateComponentRoute(request)
 
 @app.route('/stock', methods=["GET"])
 @login_required

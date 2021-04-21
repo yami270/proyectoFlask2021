@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-8">
+
+  {% with errors = get_flashed_messages(category_filter=["AC"]) %}
+  {% if errors %}
+    {% for msg in errors %}
+      <div class="alert alert-success" role="alert"> {{ msg }} </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {% with errors = get_flashed_messages(category_filter=["WA"]) %}
+  {% if errors %}
+    {% for msg in errors %}
+      <div class="alert alert-danger" role="alert"> {{ msg }} </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+<div class="card">
+<div class="card-header"> Actualizar componente </div>
+<div class="card-body">
+<form method="POST" action="{{url_for('updateComponentRoute')}}" id="form-update-component">
+  {{ form.csrf_token }}
+
+  <div class="form-group row py-2">
+    <label for="codeComponent" class="col-md-4 col-form-label text-md-end"> Seleccionar componente </label>
+    <div class="col-md-6">
+      <select id="codeComponent" class="form-control" name="codeComponent">
+      {% for value in data %}
+        <option value="{{value.id}}"> {{value.machine.nameMachine+" : "+value.nameComponent}} </option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row py-2">
+    {{ form.nameComponent.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-6">
+      {% if form.nameComponent.errors %}
+        {{ form.nameComponent(class="form-control is-invalid") }} 
+        {% for error in form.nameComponent.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.nameComponent(class="form-control") }} 
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group row py-2">
+    {{ form.typeComponent.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-2 pe-0">
+      {% if form.typeComponent.errors %}
+        {{ form.typeComponent(class="form-control is-invalid") }} 
+        {% for error in form.typeComponent.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.typeComponent(class="form-control") }} 
+      {% endif %}
+    </div>
+
+    {{ form.priority.label(class="col-md-2 col-form-label text-md-end px-0")}}
+    <div class="col-md-2">
+      {% if form.priority.errors %}
+        {{ form.priority(class="form-control is-invalid") }} 
+        {% for error in form.priority.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.priority(class="form-control") }} 
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group row py-2">
+    {{ form.minimumStock.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-2">
+      {% if form.minimumStock.errors %}
+        {{ form.minimumStock(class="form-control is-invalid", type="number") }} 
+        {% for error in form.minimumStock.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.minimumStock(class="form-control", type="number") }} 
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="form-group row py-2">
+    {{ form.notes.label(class="col-md-4 col-form-label text-md-end")}}
+    <div class="col-md-6">
+      {% if form.notes.errors %}
+        {{ form.notes(class="form-control is-invalid") }} 
+        {% for error in form.notes.errors %}
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ error }}</strong>
+        </span>
+        {% endfor %}
+      {% else %}
+        {{ form.notes(class="form-control") }} 
+      {% endif %}
+    </div>
+  </div>
+
+
+  <div class="form-group row my-2">
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary"> Actualizar Componente </button>
+    </div>
+  </div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -39,8 +39,12 @@
           </div>
         </li>
 
-        <li class="nav-item"> 
-          <a class="nav-link" href="{{url_for('updateRoute')}}">Actualizar</a>
+        <li class="nav-item dropdown">
+          <a id="navbarDropdownLeft_2" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Actualizar </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownLeft_2">
+            <li><a class="dropdown-item" href="{{url_for('updateMachineRoute')}}"> Actualizar maquina</a></li>
+            <li><a class="dropdown-item" href="{{url_for('updateComponentRoute')}}"> Actualizar componente</a></li>
+          </ul>
         </li>
 
         <li class="nav-item"> 

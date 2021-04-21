@@ -25,6 +25,31 @@ class MachineController():
 		else:
 			return render_template('registerMachine.html', formLogout=formLogout, form=form)
 
+	def updateMachineRoute(self, request):
+		form = machineForm(request.form) # Creacion del formulario
+		formLogout = loginForm()
+		if request.method == 'POST' and form.validate():
+			machineTemp = db.session.query(machine).filter(machine.id == request.form['codeMachine']).first()
+			if not machineTemp:
+				flash('Error: No existe una maquina registrada a ese nombre', 'WA')
+				data = db.session.query(machine.id, machine.nameMachine).order_by(machine.id.asc())
+				return render_template('updateMachine.html', formLogout=formLogout, form=form, data=data)
+			
+			machineDuplicate = db.session.query(machine).filter(machine.nameMachine == request.form['nameMachine']).filter(machine.id != request.form['codeMachine']).first()
+			if machineDuplicate: # error de nombre
+				flash('Error: Ya existe una maquina registrada a ese nombre', 'WA')
+				data = db.session.query(machine.id, machine.nameMachine).order_by(machine.id.asc())
+				return render_template('updateMachine.html', formLogout=formLogout, form=form, data=data)
+
+			machineTemp.nameMachine = request.form['nameMachine']
+			machineTemp.descriptionMachine = request.form['descriptionMachine']
+			db.session.commit() 
+			flash('Maquina actualizada exitosamente', 'AC')
+			return redirect(url_for('homeRoute'))
+		else:
+			data = db.session.query(machine.id, machine.nameMachine).order_by(machine.id.asc())
+			return render_template('updateMachine.html', formLogout=formLogout, form=form, data=data)
+
 	def viewMachineRoute(self, request):
 		formLogout = loginForm()
 		data = db.session.query(machine.id, machine.nameMachine).order_by(machine.id.asc())

@@ -3,32 +3,37 @@
 function loadData(data, type){
 	if(type == "Machine"){
 		document.querySelector("#descriptionMachine").value = data['descriptionMachine'];
+		if(document.querySelector("#nameMachine"))
+			document.querySelector("#nameMachine").value = data['nameMachine'];
 	}
 	else if(type == "Component"){
-		document.querySelector('#nameComponent').value = data["nameComponent"];
-		if(data["typeComponent"] == 1)
-			document.querySelector('#typeComponent').value = "Electrico";
-		else if(data["typeComponent"] == 2)
-			document.querySelector('#typeComponent').value = "Mecanico";
-		else if(data["typeComponent"] == 3)
-			document.querySelector('#typeComponent').value = "Neumatico";
-		else if(data["typeComponent"] == 4)
-			document.querySelector('#typeComponent').value = "Hidraulico";
-		else
-			document.querySelector('#typeComponent').value = "Quimico";
-
-		if(data["priority"] == 1)
-			document.querySelector('#priority').value = "A";
-		else if(data["priority"] == 2)
-			document.querySelector('#priority').value = "B";
-		else if(data["priority"] == 3)
-			document.querySelector('#priority').value = "C";
-		else
-			document.querySelector('#priority').value = "-";
-
-		document.querySelector('#notes').value = data['notes'];
-		document.querySelector('#currentStock').value = data['currentStock'];
-		document.querySelector('#minimumStock').value = data['minimumStock'];
+		if(document.querySelector('#form-update-component')){
+			document.querySelector('#nameComponent').value = data["nameComponent"];
+			document.querySelector('#typeComponent').value = data["typeComponent"];
+			document.querySelector('#priority').value = data["priority"];
+			document.querySelector('#notes').value = data['notes'];
+			document.querySelector('#minimumStock').value = data['minimumStock'];
+		}
+		else{		
+			document.querySelector('#nameComponent').value = data["nameComponent"];
+			switch(data["typeComponent"]) {
+				case 1: document.querySelector('#typeComponent').value = "Electrico"; break;
+				case 2: document.querySelector('#typeComponent').value = "Mecanico"; break;
+				case 3: document.querySelector('#typeComponent').value = "Neumatico"; break;
+				case 4: document.querySelector('#typeComponent').value = "Hidraulico"; break;
+				case 5: document.querySelector('#typeComponent').value = "Quimico"; break;
+				default: document.querySelector('#typeComponent').value = "--"; break;
+			}
+			switch(data["priority"]) {
+				case 1: document.querySelector('#priority').value = "A"; break;
+				case 2: document.querySelector('#priority').value = "B"; break;
+				case 3: document.querySelector('#priority').value = "C"; break;
+				default: document.querySelector('#priority').value = "--"; break;
+			}
+			document.querySelector('#notes').value = data['notes'];
+			document.querySelector('#currentStock').value = data['currentStock'];
+			document.querySelector('#minimumStock').value = data['minimumStock'];
+		}
 	}
 }
 
@@ -51,7 +56,7 @@ function getList(url, type, value){
 	};
 }
 
-if(document.querySelector('#ver-maquina')){
+if(document.querySelector('#ver-maquina') || document.querySelector('#form-update-machine')){
 	let listMachines = document.querySelector('#codeMachine');
 	listMachines.addEventListener('change', function(){
 		getList("/verMaquina", "Machine", listMachines.value);
@@ -65,4 +70,14 @@ if(document.querySelector('#ver-componente')){
 		getList("/verComponente", "Component", listComponents.value);
 	});
 	listComponents.value = "";
+}
+
+if(document.querySelector('#form-update-component')){
+	let listComponents = document.querySelector('#codeComponent');
+	listComponents.addEventListener('change', function(){
+		getList("/verComponente", "Component", listComponents.value);
+	});
+	listComponents.value = "";
+	document.querySelector('#typeComponent').value = "";
+	document.querySelector('#priority').value = "";
 }
