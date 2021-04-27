@@ -4,9 +4,17 @@ from appPackage.models.MachineModel import machine
 from appPackage.models.ComponentModel import component
 from appPackage.models.UtilizationModel import utilization
 from appPackage.models.PurchaseModel import purchase
-from appPackage.formsValidation import loginForm, registerForm, machineForm, componentForm, stockForm
+from appPackage.controllers.LoginController import loginForm
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
+from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
+
+class stockForm(FlaskForm):
+	codeComponent = SelectField('Nombre Componente', coerce=int)
+	amount = IntegerField('Cantidad', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
+	date = DateField('Fecha registro', [DataRequired(message='Debe llenar este campo')])
 
 class StockController():
 	def __init__(self):

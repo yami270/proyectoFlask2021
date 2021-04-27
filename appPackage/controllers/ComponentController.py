@@ -4,10 +4,30 @@ from appPackage.models.MachineModel import machine
 from appPackage.models.ComponentModel import component
 from appPackage.models.UtilizationModel import utilization
 from appPackage.models.PurchaseModel import purchase
-from appPackage.formsValidation import loginForm, registerForm, machineForm, componentForm, componentUpdateForm
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
+from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
+from appPackage.controllers.LoginController import loginForm
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 import json
+
+class componentForm(FlaskForm):
+	codeMachine = SelectField('Nombre Maquina', coerce=int)
+	nameComponent = StringField('Nombre componente', [DataRequired(message='Debe llenar este campo'), Length(min=1, message='Ingresar un nombre valido')])
+	typeComponent = SelectField('Tipo de componente', choices=[('1', 'Electrico'), ('2', 'Mecanico'), ('3', 'Neumatico'), ('4', 'Hidraulico'), ('5', 'Quimico')])
+	priority = SelectField('Prioridad', choices=[('1', 'A'), ('2', 'B'), ('3', 'C')])
+	notes = TextAreaField('Notas para el tecnico')
+	currentStock = IntegerField('Cantidad Stock', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
+	minimumStock = IntegerField('Cantidad minima', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
+	date = DateField('Fecha de registro', [DataRequired(message='Debe llenar este campo')])
+
+class componentUpdateForm(FlaskForm):
+	nameComponent = StringField('Nombre componente', [DataRequired(message='Debe llenar este campo'), Length(min=1, message='Ingresar un nombre valido')])
+	typeComponent = SelectField('Tipo de componente', choices=[('1', 'Electrico'), ('2', 'Mecanico'), ('3', 'Neumatico'), ('4', 'Hidraulico'), ('5', 'Quimico')])
+	priority = SelectField('Prioridad', choices=[('1', 'A'), ('2', 'B'), ('3', 'C')])
+	notes = TextAreaField('Notas para el tecnico')
+	minimumStock = IntegerField('Cantidad minima', [DataRequired(message='Debe llenar este campo'), NumberRange(min=1, message='Ingresar un monto valido')])
 
 class ComponentController():
 	def __init__(self):

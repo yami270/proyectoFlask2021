@@ -4,10 +4,17 @@ from appPackage.models.MachineModel import machine
 from appPackage.models.ComponentModel import component
 from appPackage.models.UtilizationModel import utilization
 from appPackage.models.PurchaseModel import purchase
-from appPackage.formsValidation import loginForm, registerForm, machineForm
+from appPackage.controllers.LoginController import loginForm
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 import json
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
+from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
+
+class machineForm(FlaskForm):
+	nameMachine = StringField('Nombre maquina', [DataRequired(message='Debe llenar este campo'), Length(min=1, message='Ingresar un nombre valido')])
+	descriptionMachine = TextAreaField('Descripcion')
 
 class MachineController():
 	def __init__(self):

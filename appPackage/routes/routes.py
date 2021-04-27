@@ -1,17 +1,10 @@
 from appPackage import app, login_manager
-from appPackage.models import db
-from appPackage.models.UserModel import user
-from appPackage.models.MachineModel import machine
-from appPackage.models.ComponentModel import component
-from appPackage.models.UtilizationModel import utilization
-from appPackage.models.PurchaseModel import purchase
-from appPackage.formsValidation import loginForm, registerForm
-from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_required, logout_user, current_user, login_user
+from flask import request
+from flask_login import login_required
 
 @login_manager.user_loader
 def load_user(user_id):
-	return user.query.get(user_id)
+	return myLoginController.user_loader(user_id)
 
 @app.route('/login', methods=["GET", "POST"])
 def loginRoute():
