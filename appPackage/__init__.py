@@ -10,5 +10,4 @@ login_manager.login_view = 'loginRoute'
 login_manager.init_app(app)
 csrf = CSRFProtect(app)
 
-from appPackage import models
 from appPackage.routes import routes
