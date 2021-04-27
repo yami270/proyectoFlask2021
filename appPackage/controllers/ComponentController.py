@@ -1,6 +1,6 @@
 from appPackage.models import db, user, machine, component, utilization, purchase
 from appPackage.formsValidation import loginForm, registerForm, machineForm, componentForm, componentUpdateForm
-from appPackage.routes import *
+from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 import json
 
