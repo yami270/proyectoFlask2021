@@ -9,6 +9,7 @@ from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 import json
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
 
@@ -21,6 +22,9 @@ class MachineController():
 		pass
 
 	def registerMachineRoute(self, request):
+		if current_user.typeUser == 3:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		form = machineForm(request.form) # Creacion del formulario
 		formLogout = loginForm()
 		if request.method == 'POST' and form.validate():
@@ -38,6 +42,9 @@ class MachineController():
 			return render_template('registerMachine.html', formLogout=formLogout, form=form)
 
 	def updateMachineRoute(self, request):
+		if current_user.typeUser == 3:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		form = machineForm(request.form) # Creacion del formulario
 		formLogout = loginForm()
 		if request.method == 'POST' and form.validate():

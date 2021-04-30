@@ -5,6 +5,7 @@ from appPackage.models.ComponentModel import component
 from appPackage.models.UtilizationModel import utilization
 from appPackage.models.PurchaseModel import purchase
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
 from appPackage.controllers.LoginController import loginForm
@@ -34,6 +35,9 @@ class ComponentController():
 		pass
 
 	def registerComponentRoute(self, request):
+		if current_user.typeUser == 3:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		form = componentForm(request.form) # Creacion del formulario
 		form.codeMachine.choices = [(g.id, g.nameMachine) for g in db.session.query(machine)]
 		formLogout = loginForm()
@@ -55,6 +59,9 @@ class ComponentController():
 			return render_template('registerComponent.html', formLogout=formLogout, form=form)
 
 	def updateComponentRoute(self, request):
+		if current_user.typeUser == 3:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		form = componentUpdateForm(request.form) # Creacion del formulario
 		formLogout = loginForm()
 		data = db.session.query(component).order_by(component.codeMachine.asc())

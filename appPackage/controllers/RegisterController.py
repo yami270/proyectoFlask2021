@@ -8,6 +8,7 @@ from appPackage.controllers.LoginController import loginForm
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
 
@@ -23,6 +24,9 @@ class RegisterController():
 		pass
 		
 	def registerRoute(self, request):
+		if current_user.typeUser == 3:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		form = registerForm(request.form) # Creacion del formulario
 		formLogout = loginForm()
 		if request.method == 'POST' and form.validate():
