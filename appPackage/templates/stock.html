@@ -21,6 +21,7 @@
   {% endif %}
   {% endwith %}
 
+{% if current_user.typeUser == 2 %}
 <div class="card">
   <div class="card-header"> Registrar compra </div>
   <div class="card-body">
@@ -84,7 +85,9 @@
     </form>
   </div>
 </div>
+{% endif %}
 
+{% if current_user.typeUser == 3 %}
 <div class="card my-4">
   <div class="card-header"> Registrar uso </div>
   <div class="card-body">
@@ -148,6 +151,7 @@
     </form>
   </div>
 </div>
+{% endif %}
 </div>
 </div>
 </div>

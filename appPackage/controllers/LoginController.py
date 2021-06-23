@@ -1,9 +1,6 @@
 from appPackage.models import db
 from appPackage.models.UserModel import user
-from appPackage.models.MachineModel import machine
 from appPackage.models.ComponentModel import component
-from appPackage.models.UtilizationModel import utilization
-from appPackage.models.PurchaseModel import purchase
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, logout_user, current_user, login_user

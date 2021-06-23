@@ -1,6 +1,4 @@
 from appPackage.models import db
-from appPackage.models.UserModel import user
-from appPackage.models.MachineModel import machine
 from appPackage.models.ComponentModel import component
 from appPackage.models.UtilizationModel import utilization
 from appPackage.models.PurchaseModel import purchase
@@ -8,6 +6,7 @@ from appPackage.controllers.LoginController import loginForm
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
 
@@ -28,6 +27,9 @@ class StockController():
 		return render_template('stock.html', formLogout=formLogout, formPurchase=formPurchase, formUtilization=formUtilization)
 
 	def stockPurchaseRoute(self, request):
+		if current_user.typeUser == 3:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		formPurchase = stockForm(request.form) # Creacion del formulario
 		formPurchase.codeComponent.choices = [(g.id, g.machine.nameMachine+" : "+g.nameComponent) for g in db.session.query(component)]
 		if formPurchase.validate():
@@ -43,6 +45,9 @@ class StockController():
 			return redirect(url_for('stockRoute'))
 
 	def stockUtilizationRoute(self, request):
+		if current_user.typeUser == 2:
+			flash('Error 404: Ruta no encontrada', 'WA')
+			return redirect(url_for('homeRoute'))
 		formUtilization = stockForm(request.form) # Creacion del formulario
 		formUtilization.codeComponent.choices = [(g.id, g.machine.nameMachine+" : "+g.nameComponent) for g in db.session.query(component)]
 		if formUtilization.validate():

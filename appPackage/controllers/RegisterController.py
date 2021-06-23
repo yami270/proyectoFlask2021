@@ -1,9 +1,5 @@
 from appPackage.models import db
 from appPackage.models.UserModel import user
-from appPackage.models.MachineModel import machine
-from appPackage.models.ComponentModel import component
-from appPackage.models.UtilizationModel import utilization
-from appPackage.models.PurchaseModel import purchase
 from appPackage.controllers.LoginController import loginForm
 from appPackage.routes.routes import *
 from flask import render_template, request, redirect, url_for, flash
